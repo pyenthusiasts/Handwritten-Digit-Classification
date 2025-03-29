@@ -7,7 +7,7 @@ from tensorflow.keras.layers import Dense, Dropout, Flatten
 from tensorflow.keras.utils import to_categorical
 
 # Load the MNIST dataset
-(X_train, y_train), (X_test, y_test) = mnist.load_data()
+(X_train, y_train), (X_test, y_test) = mnist.load_data() 
 
 # Preprocess the data
 X_train = X_train.astype('float32') / 255  # Normalize the images to [0, 1]
