@@ -13,3 +13,7 @@ seaborn>=0.12.0
 
 # Machine Learning utilities
 scikit-learn>=1.2.0
+
+# Optional: API server dependencies
+# Install separately with: pip install -r requirements-api.txt
+# Or: pip install fastapi uvicorn[standard] python-multipart pillow

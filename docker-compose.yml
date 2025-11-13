@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  # Training service
+  train:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mnist-classifier:latest
+    container_name: mnist-train
+    command: python train.py --epochs 10 --verbose
+    volumes:
+      - ./models:/app/models
+      - ./results:/app/results
+      - ./data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - mnist-network
+
+  # API service
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    image: mnist-api:latest
+    container_name: mnist-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models:ro
+    environment:
+      - MODEL_PATH=/app/models/best_model.h5
+      - LOG_LEVEL=info
+    depends_on:
+      - train
+    networks:
+      - mnist-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Development service with Jupyter
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mnist-classifier:latest
+    container_name: mnist-dev
+    command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - mnist-network
+
+networks:
+  mnist-network:
+    driver: bridge
+
+volumes:
+  models:
+  results:
+  data:

@@ -1,0 +1,12 @@
+# Model export dependencies
+
+# Include core requirements
+-r requirements.txt
+
+# ONNX export
+tf2onnx>=1.15.0
+onnx>=1.14.0
+onnxruntime>=1.16.0
+
+# Additional optimization tools
+tensorflow-model-optimization>=0.7.0
