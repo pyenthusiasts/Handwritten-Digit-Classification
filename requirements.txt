@@ -1,0 +1,15 @@
+# Core dependencies for MNIST Digit Classification
+
+# Deep Learning
+tensorflow>=2.12.0,<3.0.0
+keras>=2.12.0
+
+# Data manipulation and numerical computing
+numpy>=1.24.0,<2.0.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Machine Learning utilities
+scikit-learn>=1.2.0
