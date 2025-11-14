@@ -1,3 +1,15 @@
+# Project-specific
+models/*.h5
+models/*.keras
+models/*.pb
+!models/.gitkeep
+results/plots/*
+!results/plots/.gitkeep
+results/logs/*
+!results/logs/.gitkeep
+data/mnist/
+!data/.gitkeep
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
